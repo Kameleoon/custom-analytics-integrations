@@ -1,4 +1,4 @@
-# Custom Integrations
+# Custom Analytics Integrations
 
 ## Introduction
-This repo stores custom integrations base code for each analytics tool.
+This repo stores custom analytics integrations base code for each analytics tool.
