@@ -2,7 +2,7 @@
 const name = experimentName ? experimentName : personalizationName;
 
 // Define the id of the current experiment or personalization
-const id = experimentId ? experimentId : personalizationId;
+const id = experimentID ? experimentID : personalizationID;
 
 const processMPathy = function() {
     const mPathyPrefix = id == 0 ? "MM_Prod_" : "MM_QA_";

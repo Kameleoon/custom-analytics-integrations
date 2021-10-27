@@ -4,7 +4,7 @@ const processSegment = function() {
     const analytics = window.analytics;
     if (isExperiment) {
         analytics.track("Experiment Viewed", {
-            experimentId: experimentId,
+            experimentID: experimentID,
             experimentName: experimentName,
             variationId: variationId,
             variationName: variationName,
@@ -15,7 +15,7 @@ const processSegment = function() {
         });
     } else {
         analytics.track("Personalization Viewed", {
-            personalizationId: personalizationId,
+            personalizationID: personalizationID,
             personalizationName: personalizationName,
             variationId: variationId,
             variationName: variationName,

@@ -2,13 +2,13 @@
 const name = experimentName ? experimentName : personalizationName;
 
 // Define the id of the current experiment or personalization
-const id = experimentId ? experimentId : personalizationId;
+const id = experimentID ? experimentID : personalizationID;
 
 // if you want to send data to a specific Google GA4 MeasureID - use your own ID e.g. G-NDPJ085xyz
 const gtagMeasurementID = 'default';
 
 // Define the event name
-const eventName = experimentId ? "Kameleoon Experiment" : "Kameleoon Personalization";
+const eventName = experimentID ? "Kameleoon Experiment" : "Kameleoon Personalization";
 
 // Define gtag method if not present
 window.dataLayer = window.dataLayer || [];

@@ -2,10 +2,10 @@
 const name = experimentName ? experimentName : personalizationName;
 
 // Define the id of the current experiment or personalization
-const id = experimentId ? experimentId : personalizationId;
+const id = experimentID ? experimentID : personalizationID;
 
 // Define the prefix
-const prefix = experimentId ? "AB" : "PERSO";
+const prefix = experimentID ? "AB" : "PERSO";
 
 const processContentSquare = function() {
     window._uxa.push([
