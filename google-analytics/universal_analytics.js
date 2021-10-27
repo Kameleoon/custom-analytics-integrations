@@ -2,7 +2,7 @@
 const name = experimentName ? experimentName : personalizationName;
 
 // Define the id of the current experiment or personalization
-const id = experimentId ? experimentId : personalizationId;
+const id = experimentID ? experimentID : personalizationID;
 
 // Define your tracking universal analytics tracking ID or set it to null for default
 const trackingID = null;

@@ -2,17 +2,17 @@
 const name = experimentName ? experimentName : personalizationName;
 
 // Define the id of the current experiment or personalization
-const id = experimentId ? experimentId : personalizationId;
+const id = experimentID ? experimentID : personalizationID;
 
 // Define the prefix
-const prefix = experimentId ? "AB" : "PERSO";
+const prefix = experimentID ? "AB" : "PERSO";
 
 const processContentSquare = function() {
     window._uxa.push([
         "trackDynamicVariable",
         {
             key: prefix + "_Kameleoon_" + id,
-            value: (variationId === 0 ? "reference" : variationId).toString()
+            value: (variationID === 0 ? "reference" : variationID).toString()
         }
     ]);
 };

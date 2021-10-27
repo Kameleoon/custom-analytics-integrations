@@ -2,11 +2,11 @@
 const webtrekkVariableName = "wt";
 
 // Define the id of the current experiment or personalization
-const id = experimentId ? experimentId : personalizationId;
+const id = experimentID ? experimentID : personalizationID;
 
 const processWebtrekk = function() {
     const webtrekkObject = window[webtrekkVariableName];
-    let data = {1: variationId};
+    let data = {1: variationID};
     webtrekkObject.sendinfo({
         linkId: "kameleoon_" + id + "_" + variationName,
         customClickParameter: data

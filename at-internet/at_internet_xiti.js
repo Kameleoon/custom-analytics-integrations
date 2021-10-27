@@ -2,10 +2,10 @@
 const name = experimentName ? experimentName : personalizationName;
 
 // Define the id of the current experiment or personalization
-const id = experimentId ? experimentId : personalizationId;
+const id = experimentID ? experimentID : personalizationID;
 
 // Define formatted data to send
-const data = `${id}[${name}]-0-${variationId}[${variationName}]`;
+const data = `${id}[${name}]-0-${variationID}[${variationName}]`;
 
 const processAtInternet = function() {
     window.xt_mvt(window.xtpage, window.xtn2, data);
