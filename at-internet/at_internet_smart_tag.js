@@ -14,7 +14,7 @@ const processSmartTag = function() {
         smartTag.mvTesting.set({
             test: id + "[" + escapedName + "]",
             waveId: 1,
-            creation: variationId + "[" + encodeURIComponent(variationName) + "]"
+            creation: variationID + "[" + encodeURIComponent(variationName) + "]"
         });
         smartTag.dispatch();
     }

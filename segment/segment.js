@@ -6,7 +6,7 @@ const processSegment = function() {
         analytics.track("Experiment Viewed", {
             experimentID: experimentID,
             experimentName: experimentName,
-            variationId: variationId,
+            variationID: variationID,
             variationName: variationName,
             nonInteraction: 1
         });
@@ -17,7 +17,7 @@ const processSegment = function() {
         analytics.track("Personalization Viewed", {
             personalizationID: personalizationID,
             personalizationName: personalizationName,
-            variationId: variationId,
+            variationID: variationID,
             variationName: variationName,
             nonInteraction: 1
         });

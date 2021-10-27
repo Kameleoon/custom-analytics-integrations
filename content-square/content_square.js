@@ -12,7 +12,7 @@ const processContentSquare = function() {
         "trackDynamicVariable",
         {
             key: prefix + "_Kameleoon_" + id,
-            value: (variationId === 0 ? "reference" : variationId).toString()
+            value: (variationID === 0 ? "reference" : variationID).toString()
         }
     ]);
 };
