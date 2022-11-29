@@ -1,16 +1,14 @@
-// Define the name of the current experiment or personalization
-const name = experimentName ? experimentName : personalizationName;
-
-// Define your crazy egg custom variable
-const crazyEggCustomVariable = 1;
-
-const processCrazyEgg = function () {
-    let escapedName = name.replace(/\//gi, "-");
-    window.CE2.set(crazyEggCustomVariable,
-        "/Kameleoon/" + escapedName + "/" + encodeURIComponent(variationName)
-    );
+// Define the id of the current experiment or personalization
+const id = experimentID ? experimentID : personalizationID;
+// Define the name of the current variation
+const name = variationName === "Reference" ? "Original" : variationName;
+const processCrazyegg = function () {
+    window.CE_SNAPSHOT_NAME = `${id}-${name}`;
 };
-
-Kameleoon.API.Core.runWhenConditionTrue(function() {
-    return window.CE2 != null;
-}, processCrazyEgg, 150);
+Kameleoon.API.Core.runWhenConditionTrue(
+    function () {
+        return window.CE2 !== undefined;
+    },
+    processCrazyegg,
+    150
+);
