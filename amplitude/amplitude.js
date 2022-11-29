@@ -5,14 +5,13 @@ const name = experimentName ? experimentName : personalizationName;
 const id = experimentID ? experimentID : personalizationID;
 
 const processAmplitude = function() {
-    const campaignProperties = {
-        KameleoonCampaignID: id,
-        KameleoonCampaignName: name,
-        KameleoonVariationID: variationID,
-        KameleoonVariationName: variationName
-    };
-
-    window.amplitude.getInstance().setUserProperties(campaignProperties);
+    const identify = new amplitude.Identify();
+    identify
+        .set("KameleoonCampaignID", id)
+        .set("KameleoonCampaignName", name)
+        .set("KameleoonVariationID", variationID)
+        .set("KameleoonVariationName", variationName)
+    amplitude.identify(identify);
 };
 
 Kameleoon.API.Core.runWhenConditionTrue(function() {
