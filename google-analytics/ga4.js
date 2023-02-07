@@ -10,14 +10,6 @@ const gtagMeasurementID = 'default';
 // Define the event name
 const eventName = experimentID ? "Kameleoon Experiment" : "Kameleoon Personalization";
 
-// Define gtag method if not present
-window.dataLayer = window.dataLayer || [];
-if (window.gtag == null) {
-    window.gtag = function() {
-        window.dataLayer.push(arguments);
-    }
-}
-
 const processGA4 = function() {
     let properties = `${id} - ${name} - ${variationID} - ${variationName}`;
 ​
@@ -28,4 +20,6 @@ const processGA4 = function() {
     });
 }
 
-processGA4();
+Kameleoon.API.Core.runWhenConditionTrue(function() {
+    return window.gtag != null;
+}, processGA4, 150);
