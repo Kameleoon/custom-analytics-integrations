@@ -12,7 +12,7 @@ const processGA4 = function() {
         // using the Google tag (gtag.js)
         let properties = `${id} - ${name} - ${variationID} - ${variationName}`;
         window.gtag("event", eventName, {
-			// if you want to send data to a specific Google GA4 MeasureID - uncomment next line and use your own ID e.g. G-NDPJ085xyz
+	    // if you want to send data to a specific Google GA4 MeasureID - uncomment next line and use your own ID e.g. G-NDPJ085xyz
             // "send_to": "Google GA4 MeasureID",
             "experiment_variation": properties, 
             "event_timeout": 2000
