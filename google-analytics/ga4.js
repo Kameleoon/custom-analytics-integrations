@@ -10,22 +10,28 @@ const gtagMeasurementID = 'default';
 // Define the event name
 const eventName = experimentID ? "Kameleoon Experiment" : "Kameleoon Personalization";
 
-// Define gtag method if not present
-window.dataLayer = window.dataLayer || [];
-if (window.gtag == null) {
-    window.gtag = function() {
-        window.dataLayer.push(arguments);
-    }
-}
-
 const processGA4 = function() {
-    let properties = `${id} - ${name} - ${variationID} - ${variationName}`;
-​
-    window.gtag("event", eventName, {
-        "send_to": gtagMeasurementID,
-        "experiment_variation": properties, 
-        "event_timeout": 2000
-    });
+    if (window.gtag) {
+        // using the Google tag (gtag.js)
+        let properties = `${id} - ${name} - ${variationID} - ${variationName}`;
+        window.gtag("event", eventName, {
+            "send_to": gtagMeasurementID,
+            "experiment_variation": properties, 
+            "event_timeout": 2000
+        });
+    } else {
+        // using Google Tag Manager
+        window.dataLayer.push({
+            event: eventName,
+            campaign_name: name,
+            campaign_id: id,
+            variation_name: variationName,
+            variation_id: variationID
+        });
+    }
+
 }
 
-processGA4();
+Kameleoon.API.Core.runWhenConditionTrue(function() {
+    return window.gtag != null || window.dataLayer != null;
+}, processGA4, 150);
