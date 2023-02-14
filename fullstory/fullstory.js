@@ -14,9 +14,9 @@ const processFullstory = function () {
     fsEventPayload.variation.name_str = variationName;
 
     let _fs = window[window["_fs_namespace"]];
-    _fs().event('Kameleoon campaign', fsEventPayload, 'Kameleoon');
+    _fs.event("Kameleoon campaign", fsEventPayload, "Kameleoon");
 };
 
 Kameleoon.API.Core.runWhenConditionTrue(function () {
-    return window["fs_namespace"] != null && window[window["_fs_namespace"]];
+    return window["_fs_namespace"] != null && window[window["_fs_namespace"]];
 }, processFullstory, 150);
