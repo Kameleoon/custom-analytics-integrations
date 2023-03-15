@@ -8,7 +8,7 @@ const eVar = "eVar123";
 const name = experimentName ? experimentName : personalizationName;
 
 const processAdobeOmniture = function() {
-    const adobeOmnitureObject = window.adobeOmnitureVariableName;
+    const adobeOmnitureObject = window[adobeOmnitureVariableName];
     adobeOmnitureObject.linkTrackVars = "";
     adobeOmnitureObject[eVar] = name + " / " + variationName;
     adobeOmnitureObject.tl(true, "o", "Kameleoon Tracking");
