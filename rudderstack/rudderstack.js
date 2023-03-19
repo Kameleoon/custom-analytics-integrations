@@ -8,16 +8,14 @@ const processRudderStack = function() {
             experimentID: experimentID,
             experimentName: experimentName,
             variationID: variationID,
-            variationName: variationName,
-            nonInteraction: 1
+            variationName: variationName
         });
     } else {
         rudderanalytics.track("Personalization Viewed", {
             personalizationID: personalizationID,
             personalizationName: personalizationName,
             variationID: variationID,
-            variationName: variationName,
-            nonInteraction: 1
+            variationName: variationName
         });
     }
 };
