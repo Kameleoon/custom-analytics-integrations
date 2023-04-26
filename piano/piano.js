@@ -1,7 +1,10 @@
 // Documentation  https://developers.atinternet-solutions.com/piano-analytics/
 
-// Define the name of the instance variable name of smart tag on your website (if "AS2 tagging" used)
-const smartTag = "tag";
+//If you use SmartTag SDKs, define the name of the instance variable name of smart tag on your website
+//(https://developers.atinternet-solutions.com/piano-analytics/data-collection/general/migrate-from-smarttag#smarttag---pa-tagging-winter-2020)
+const smartTag = "yourSmartTag";
+//If you use  new Piano Analytics SDKs, just don't define that variable.
+//(you can see window.pa variable in console on your website)
 
 // Define the name of the current experiment or personalization
 const name = experimentName ? experimentName : personalizationName;
@@ -10,26 +13,28 @@ const name = experimentName ? experimentName : personalizationName;
 const id = experimentID ? experimentID : personalizationID;
 
 const processEventPiano = function() {
-    let version_tag = window[smartTag]?.version || window.pa?.cfg?.getConfiguration('version') || [],
-    escapedName = name.replace(/\//gi, "-").replace(/#/g, "-").replace(/&/g, "-"),
-    data = {
-        'mv_creation' : variationID + "[" + encodeURIComponent(variationName) + "]",
-        'mv_test' : id + "[" + escapedName + "]",
-        'mv_wave': 1, 
+    let versionTag =
+		(smartTag && smartTag.version) || (window.pa && window.pa.cfg && window.pa.cfg.getConfiguration("version"));
+    let escapedName = name.replace(/[\/#&]/gi, "-");
+    let data = {
+        mv_creation: variationID + "[" + name + "]",
+        mv_test: id + "[" + escapedName + "]",
+        mv_wave: 1
     };
-    if (version_tag < "6" ){
-        let A2S_tag = window[smartTag];
-        A2S_tag.events.send('mv_test.display',data);
 
+    if (smartTag && versionTag < "6") {
+        smartTag.events && smartTag.events.send && smartTag.events.send("mv_test.display", data);
     } else {
-        pa.sendEvent('mv_test.display',data);
+        window.pa && window.pa.sendEvent && window.pa.sendEvent("mv_test.display", data);
     }
 };
  
 Kameleoon.API.Core.runWhenConditionTrue(function() {
-    // Wait that smartTag is loaded and wait the optin before sending
-    let version_tag = window[smartTag]?.version || window.pa?.cfg?.getConfiguration('version') || [],
-    statusOptin = (version_tag < "6" && version_tag >= "5.21.0" && window[smartTag].privacy && window[smartTag].privacy.getVisitorMode() && window[smartTag].privacy.getVisitorMode().name == "optin") ||
-            (version_tag >= "6" && pa.privacy && pa.privacy.getMode() && pa.privacy.getMode() == "optin");
-    return statusOptin;
+    let versionTag = (smartTag && smartTag.version) || (window.pa && window.pa.cfg && window.pa.cfg.getConfiguration("version"));
+    return versionTag &&
+    ((smartTag &&
+        smartTag.privacy &&
+        smartTag.privacy.getVisitorMode() &&
+        smartTag.privacy.getVisitorMode().name == "optin") ||
+        (window.pa && window.pa.privacy && window.pa.privacy.getMode() && window.pa.privacy.getMode() == "optin"));
 }, processEventPiano, 150);
