@@ -13,8 +13,7 @@ const name = experimentName ? experimentName : personalizationName;
 const id = experimentID ? experimentID : personalizationID;
 
 const processEventPiano = function() {
-    let versionTag =
-		(smartTag && smartTag.version) || (window.pa && window.pa.cfg && window.pa.cfg.getConfiguration("version"));
+    let versionTag = smartTag?.version || window.pa?.cfg?.getConfiguration("version");
     let escapedName = name.replace(/[\/#&]/gi, "-");
     let data = {
         mv_creation: variationID + "[" + name + "]",
@@ -23,15 +22,17 @@ const processEventPiano = function() {
     };
 
     if (smartTag && versionTag < "6") {
-        smartTag.events && smartTag.events.send && smartTag.events.send("mv_test.display", data);
+        smartTag?.events?.send("mv_test.display", data);
     } else {
-        window.pa && window.pa.sendEvent && window.pa.sendEvent("mv_test.display", data);
+        window.pa?.sendEvent("mv_test.display", data);
     }
 };
- 
-Kameleoon.API.Core.runWhenConditionTrue(function() {
-    let versionTag = (smartTag && smartTag.version) || (window.pa && window.pa.cfg && window.pa.cfg.getConfiguration("version"));
-    return versionTag &&
-        (smartTag?.privacy?.getVisitorMode()?.name == "optin" || 
-            window.pa?.privacy?.getMode() == "optin");
+
+Kameleoon.API.Core.runWhenConditionTrue(
+    function () {
+        let versionTag = smartTag?.version || window.pa?.cfg?.getConfiguration("version");
+        return (
+            versionTag &&
+            (smartTag?.privacy?.getVisitorMode()?.name == "optin" || window.pa?.privacy?.getMode() == "optin")
+        );
 }, processEventPiano, 150);
