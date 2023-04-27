@@ -32,9 +32,6 @@ const processEventPiano = function() {
 Kameleoon.API.Core.runWhenConditionTrue(function() {
     let versionTag = (smartTag && smartTag.version) || (window.pa && window.pa.cfg && window.pa.cfg.getConfiguration("version"));
     return versionTag &&
-    ((smartTag &&
-        smartTag.privacy &&
-        smartTag.privacy.getVisitorMode() &&
-        smartTag.privacy.getVisitorMode().name == "optin") ||
-        (window.pa && window.pa.privacy && window.pa.privacy.getMode() && window.pa.privacy.getMode() == "optin"));
+        (smartTag?.privacy?.getVisitorMode()?.name == "optin" || 
+            window.pa?.privacy?.getMode() == "optin");
 }, processEventPiano, 150);
