@@ -2,7 +2,7 @@
 
 //If you use SmartTag SDKs, define the name of the instance variable name of smart tag on your website
 //(https://developers.atinternet-solutions.com/piano-analytics/data-collection/general/migrate-from-smarttag#smarttag---pa-tagging-winter-2020)
-const smartTag = "yourSmartTag";
+const smartTag = window["yourSmartTag"];
 //If you use  new Piano Analytics SDKs, just don't define that variable.
 //(you can see window.pa variable in console on your website)
 
