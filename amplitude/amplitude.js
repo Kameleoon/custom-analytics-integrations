@@ -6,7 +6,7 @@ const id = experimentID ? experimentID : personalizationID;
 
 const processAmplitude = function() {
     const identify = new amplitude.Identify();
-    const attributeName = "KAM-" + id + "-" + experimentName;
+    const attributeName = "KAM-" + id + "-" + name;
     identify.set(attributeName, variationID + "-" + variationName);
     amplitude.identify(identify);
 };
