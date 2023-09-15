@@ -1,7 +1,7 @@
 const isExperiment = experimentName ? true : false;
 
 const processRudderStack = function() {
-    const rudderanalytics = window.rudderanalytics = [];
+    const rudderanalytics = window.rudderanalytics;
 
     if (isExperiment) {
         rudderanalytics.track("Experiment Viewed", {
