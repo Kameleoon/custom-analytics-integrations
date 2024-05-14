@@ -13,7 +13,7 @@ const processHubspot = function () {
   window._hsq.push([
     "trackCustomBehavioralEvent",
     {
-      name: "Kameleoon",
+      name: Kameleoon.Internals.configuration.hubSpotTrackingId || "Kameleoon",
       properties: {
         type: eventType,
         campaign_id: id,
