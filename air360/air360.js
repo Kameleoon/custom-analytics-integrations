@@ -4,12 +4,14 @@ const name = experimentName ? experimentName : personalizationName;
 // Define the id of the current experiment or personalization
 const id = experimentID ? experimentID : personalizationID;
 
-// Define the event type
-const eventType = experimentID ? "Experiment" : "Personalization";
+// Define the event name
+const eventName = experimentID
+  ? "kameleoon_experiment"
+  : "kameleoon_personalization";
 
-const processGlassBox = function () {
-  window._detector.triggerCustomEventMap("Kameleoon", {
-    event: eventType,
+const processAir360 = function () {
+  Air360.track("kameleoon", {
+    event: eventName,
     campaign_id: id,
     campaign_name: name,
     variation_id: variationID,
@@ -19,8 +21,8 @@ const processGlassBox = function () {
 
 Kameleoon.API.Core.runWhenConditionTrue(
   function () {
-    return typeof window._detector != "undefined";
+    return typeof window.Air360 != "undefined";
   },
-  processGlassBox,
+  processAir360,
   150
 );
