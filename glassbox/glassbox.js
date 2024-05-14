@@ -1,22 +1,26 @@
-if (!window.sessioncamConfiguration) {
-    window.sessioncamConfiguration = new Object();
-}
-if (!window.sessioncamConfiguration.customDataObjects) {
-    window.sessioncamConfiguration.customDataObjects = [];
-}
-// Define the type
-const type = experimentID ? "Kameleoon Experiment Id" : "Kameleoon Personalization Id";
+// Define the name of the current experiment or personalization
+const name = experimentName ? experimentName : personalizationName;
 
 // Define the id of the current experiment or personalization
 const id = experimentID ? experimentID : personalizationID;
 
-const campaignData = {
-    key: type,
-    value: id,
-};
-const variationData = {
-    key: "Kameleoon Variation Name",
-    value: variationName,
+// Define the event type
+const eventType = experimentID ? "Experiment" : "Personalization";
+
+const processGlassBox = function () {
+  window._detector.triggerCustomEventMap("Kameleoon", {
+    event: eventType,
+    campaign_id: id,
+    campaign_name: name,
+    variation_id: variationID,
+    variation_name: variationName,
+  });
 };
 
-window.sessioncamConfiguration.customDataObjects.push(campaignData, variationData);
+Kameleoon.API.Core.runWhenConditionTrue(
+  function () {
+    return typeof window._detector != "undefined";
+  },
+  processGlassBox,
+  150
+);
