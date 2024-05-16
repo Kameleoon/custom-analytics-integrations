@@ -4,35 +4,32 @@ const name = experimentName ? experimentName : personalizationName;
 // Define the id of the current experiment or personalization
 const id = experimentID ? experimentID : personalizationID;
 
-// Define if the current experiment or personalization is a feature flag
-const isFeatureFlag = false;
-
 const processDataDog = function () {
-  let key = "";
+  let featureFlagKey = "";
   let value = "";
 
-  if (isFeatureFlag) {
-    const featureFlagConfiguration =
-      Kameleoon.Internals.configuration.featureFlagConfiguration || {};
+  const featureFlagConfiguration =
+    Kameleoon.Internals.configuration.featureFlagConfiguration || {};
 
-    for (const featureKey in featureFlagConfiguration) {
-      if (
-        featureFlagConfiguration[featureKey].rules.find(
-          (rule) => rule.experimentId == action.id
-        )
-      ) {
-        key = featureKey;
-        break;
-      }
+  for (const featureKey in featureFlagConfiguration) {
+    const foundRule = featureFlagConfiguration[featureKey].rules.find(
+      (rule) => rule.experimentId === id
+    );
+
+    if (foundRule) {
+      featureFlagKey = featureKey;
+      break;
     }
+  }
 
+  if (featureFlagKey) {
     value = variationID === 0 ? "off" : variationName;
   } else {
-    key = `Kameleoon-${id}-${name}`;
+    featureFlagKey = `Kameleoon-${id}-${name}`;
     value = `${variationID}-${variationName}`;
   }
 
-  window.DD_RUM.addFeatureFlagEvaluation(key, value);
+  window.DD_RUM.addFeatureFlagEvaluation(featureFlagKey, value);
 };
 
 Kameleoon.API.Core.runWhenConditionTrue(
