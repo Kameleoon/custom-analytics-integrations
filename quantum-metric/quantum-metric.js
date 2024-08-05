@@ -11,7 +11,7 @@ const eventType = experimentID ? "Experiment" : "Personalization";
 const eventID = 1;
 
 // Define the value of the Quantum Metric event.
-const eventValue = `KAM-${id}-${action.associatedVariation.id}`;
+const eventValue = `KAM-${id}-${variationID}`;
 
 const processQuantumMetric = function () {
   window.QuantumMetricAPI.sendEvent(eventID, 0, eventValue, {
