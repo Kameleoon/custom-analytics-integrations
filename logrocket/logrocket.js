@@ -8,7 +8,7 @@ const id = experimentID ? experimentID : personalizationID;
 const eventType = experimentID ? "Experiment" : "Personalization";
 
 const processLogRocket = function () {
-  LogRocket.track("Kameleoon", {
+  window.LogRocket.track("Kameleoon", {
     event: eventType,
     campaign_id: id,
     campaign_name: name,
