@@ -17,7 +17,7 @@ const sendToGetFeedback = function () {
 	 });
 };
 
-//Pass campaign information into LogRocket
+//Pass campaign information into GetFeedback
 Kameleoon.API.Core.runWhenConditionTrue(function () {
     return window.usabilla_live != null;
 }, sendToGetFeedback, 150);
