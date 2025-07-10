@@ -16,7 +16,7 @@ analytics.subscribe("page_viewed", (event) => {
       script.type = "text/javascript";
 
       // Set the src attribute to the Kameleoon JavaScript URL
-      script.src = "//" + siteCode + ".kameleoon.io/kameleoon.js";
+      script.src = "//" + siteCode + ".kameleoon.io/engine.js";
 
       // Set async attribute to true
       script.async = true;
